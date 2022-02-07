@@ -1,0 +1,44 @@
+.list{
+    max-height: 82vh ;
+    box-sizing: border-box;
+}
+
+.list_title {
+    padding-left: 10px;
+}
+
+.list_title > h4 {
+    margin: 0;
+    padding: 5px 0;
+}
+
+.list_forms {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+form > label {
+    padding-right: 10px;
+    font-size: 0.8rem;
+}
+
+form > select {
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 0.75rem;
+    text-align-last:center;
+}
+
+.list_type, .list_ratings {
+    margin: 10px;
+}
+
+.list_place_container {
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}

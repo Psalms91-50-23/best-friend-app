@@ -1,38 +1,70 @@
+
+.html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Helvetica, sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
 .App {
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home_container {
+    display: grid;
+    width: 100%;
+    height: 90%;
+    grid-gap: 16px;
+    grid-template-columns: repeat(12, 1fr);
+    margin-bottom: 10px;;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.list_container {
+    display: grid;
+    /* box-sizing: border-box; */
+    height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.map_container {
+    display: grid;
+    height: 94vh;
+    /* background-color: rgba(21, 0, 251, 0.6); */
+    /* border: 1px solid rgba(21, 0, 251, 0.6);   */
 }
 
-.App-link {
-  color: #61dafb;
+@media only screen and (max-width: 600px){
+
+    .list_container {
+        grid-column: 1/13;
+        /* margin-bottom: 20px;
+        box-sizing: border-box; */
+    }
+
+    .map_container {
+        grid-column: 1/13;
+        grid-row: 2/7;
+    }
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@media only screen and (min-width: 601px){
+
+    .list_container {
+        grid-column: 1/5;
+        
+    }
+
+    .map_container {
+        grid-column: 5/13;
+        /* height: 100%; */
+        max-height: 100%;
+    }
+
 }
