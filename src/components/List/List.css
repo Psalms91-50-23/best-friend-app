@@ -1,6 +1,13 @@
 .list{
     max-height: 82vh ;
+    height: 100%;
     box-sizing: border-box;
+}
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .list_title {
@@ -35,10 +42,31 @@ form > select {
 }
 
 .list_place_container {
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     padding-top: 10px;
     padding-left: 10px;
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100%;
+}
+
+@media only screen and (max-width: 600px){
+
+    .list {
+        /* margin-bottom: 20px; */
+        box-sizing: border-box;
+        height: auto;
+        overflow-y: scroll;
+    }
+
+}
+
+@media only screen and (min-width: 601px){
+
+    .list_place_container {
+        /* box-sizing: border-box; */
+        margin-bottom: 40px;
+        height: 95%;
+
+    }
 }

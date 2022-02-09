@@ -1,5 +1,6 @@
 import axios from "axios"
-
+// Cookies.set('http://localhost:3000', 'true')
+// axios.defaults.withCredentials = true
 const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary"
 
 export const getPlacesData = async (ne, sw) => {
@@ -14,11 +15,12 @@ export const getPlacesData = async (ne, sw) => {
             bl_longitude: sw.lng,
             tr_longitude: ne.lng,
             // limit: '30',
-      
           },
           headers: {
             'x-rapidapi-host': 'travel-advisor.p.rapidapi.com',
-            'x-rapidapi-key': '21e24ef0demshaf790a59a1eaefbp1684e3jsnfe3b75f5eaee'
+            'x-rapidapi-key': process.env.REACT_APP_RAPID_TRAVEL_API_KEY
+            // 'Set-Cookie': Cookies
+            // withCredentials: true
           }
         
           // headers: {

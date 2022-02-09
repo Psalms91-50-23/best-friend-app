@@ -13,47 +13,62 @@ const App = () => {
   const [ bounds, setBounds ] = useState(null)
   const [ coordinates, setCoordinates ] = useState({})
   const [ childClicked, setChildClicked ] = useState(null);
+  const [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
     //built in browser geolocation api
     navigator.geolocation.getCurrentPosition( coordinates => {
-      // console.log("coordindates ", coordinates);
+      // console.log("coordinates ", coordinates);
       // const { coords } = coordinates
       const { latitude, longitude } = coordinates.coords
-      // setCoordinates({ lat: latitude, lng: longitude })
+      setCoordinates({ lat: latitude, lng: longitude })
       //below is wellington
-      setCoordinates({ lat: -41.276825, lng: 174.777969 })
+      // setCoordinates({ lat: -41.276825, lng: 174.777969 })
       
     })
   },[])
 
+  
   useEffect(() => {
 
     // console.log("bounds ", bounds);
+    setIsLoading(true)
     if(bounds){
       const { ne, sw } = bounds
       getPlacesData(ne, sw)
       .then((data) => {
         // console.log("data in app.jsx ", data);
-        setPlaces(data)
+        const coordPlaces = data.filter( place => {
+          if(place?.latitude){
+            return place
+          }
+        })
+        // console.log("place with images", coordPlaces);
+        setPlaces(coordPlaces)
+        setIsLoading(false)
       })
     }
 
-  },[bounds])
+  },[bounds, coordinates])
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    setCoordinates(coordinates)
-    // console.log("coordinates: ",coordinates);
-  },[coordinates])
+  //   setCoordinates(coordinates)
+  //   // console.log("coordinates: ",coordinates);
+  // },[coordinates])
 
+  // console.log("useragentdata ",navigator.userAgentData);
 // console.log("places ", places);
   return (
     <div className='App'>
       <Header />
       <div className="home_container">
           <div className="list_container">
-            <List places={places}/>
+            <List 
+              places={places}
+              childClicked={childClicked}
+              isLoading={isLoading}
+            />
           </div>
           <div className="map_container">
             <Map 
