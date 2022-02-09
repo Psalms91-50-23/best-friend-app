@@ -4,23 +4,19 @@ import PhoneIcon  from "@material-ui/icons/Phone"
 import Rating from "@material-ui/lab/Rating"
 import "./PlaceDetails.css"
 
-const PlaceDetails = ({ place, selected, refProp, i, ref }) => {
+const PlaceDetails = ({ place, selected, refProp }) => {
   // console.log("place ", place);
   const { distance, name, distance_string, website, address } = place
   const numberDistance = Number(distance).toFixed(2)
-  const placeDetailRef = useRef(refProp) //create internal ref state for each placeDetails component
-  // console.log("refProp ",refProp[i]);
-  // console.log("refProp ",refProp);
-  
+  console.log({refProp})
+  const placeDetailRef = useRef(refProp) //create internal ref state for each 
   var cuisineType = ""
-  // if(refProp){
-  //   // console.log("refprop inside place details ", refProp);
-  // }
+
   if(selected && placeDetailRef?.current){
-    console.log({selected})
+    // console.log({selected})
     // console.log({refProp});
     placeDetailRef?.current?.scrollIntoView({behavior: "smooth", block: "start"})
-    console.log({placeDetailRef});
+    // console.log({placeDetailRef});
   }
   console.log({placeDetailRef});
   
@@ -37,7 +33,7 @@ const PlaceDetails = ({ place, selected, refProp, i, ref }) => {
         :
         <h6>Place name not registered</h6>
       }
-      <div className="general_cardLayout" ref={placeDetailRef}>
+      <div className="general_cardLayout" >
           <Rating className="rating" size="small" value={Number(place.rating)} readOnly/>
           <p>out of {place.num_reviews} review</p>
         </div>
@@ -55,6 +51,8 @@ const PlaceDetails = ({ place, selected, refProp, i, ref }) => {
         :
         <span>Distance not available</span>
       }
+      {/* this span is just a dummy location for referencing */}
+      <p className="dummy" ref={placeDetailRef}></p>
       {place.cuisine? (
         place.cuisine.map((foodType, index) => {
 

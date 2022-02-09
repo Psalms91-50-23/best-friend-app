@@ -9,12 +9,13 @@ const List = ({ places, childClicked, isLoading }) => {
   const [ type, setType ] = useState("restaurants")
   const [ rating, setRating ] = useState("")
   // const [ elementRef, setElementRef ] = useState([])
-  var placeRef = useRef(new Array())
+  // var placeRef = useRef(new Array())
+  // var tempRef = []
   // console.log("places in list ", places);
   console.log("childclicked ", childClicked); 
-  useEffect(() => {
-    Array(places?.length).fill().map((_,i) => placeRef.current.push(i))
-  },[places])
+  // useEffect(() => {
+  //   Array(places?.length).fill().map((_,i) => tempRef.push(i))
+  // },[places])
 
   // console.log("ref length ", elementRef.length);
   // console.log({elementRef});
@@ -65,15 +66,15 @@ const List = ({ places, childClicked, isLoading }) => {
               //if latitude exists, so will longitude, just checking for lat, as some do no have lat/lng
               //i didnt place card on map so the map for businesses
         
-                if(i === placeRef.length-1){
-                  console.log({placeRef});
-                }
+                // if(i === placeRef.length-1){
+                //   console.log({placeRef});
+                // }
                  return (
                  <PlaceDetails 
                     key={i} 
                     place={place} 
                     selected={Number(childClicked) === i}
-                    refProp={placeRef[i]}
+                    refProp={i}
                   />
                  )
 
