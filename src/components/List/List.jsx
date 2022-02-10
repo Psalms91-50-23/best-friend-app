@@ -1,24 +1,27 @@
-import React, { useState, useEffect, createRef, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch  } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
-import "./List.css"
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
-
+import { set_Type, set_Rating } from '../../actions/bestFriendActions';
+import "./List.css"
 
 const List = ({ places, childClicked, isLoading }) => {
 
+  const dispatch = useDispatch()
+   
   const [ type, setType ] = useState("restaurants")
   const [ rating, setRating ] = useState("")
-  // const [ elementRef, setElementRef ] = useState([])
-  // var placeRef = useRef(new Array())
-  // var tempRef = []
-  // console.log("places in list ", places);
-  console.log("childclicked ", childClicked); 
-  // useEffect(() => {
-  //   Array(places?.length).fill().map((_,i) => tempRef.push(i))
-  // },[places])
 
-  // console.log("ref length ", elementRef.length);
-  // console.log({elementRef});
+  useEffect(() => {
+    console.log({rating})
+    setRating(rating)
+    dispatch(set_Rating(rating))
+  },[rating])
+
+  useEffect(() => {
+    setType(type)
+    dispatch(set_Type(type))
+  },[type])
 
   return (
   <div className="list">
@@ -84,7 +87,7 @@ const List = ({ places, childClicked, isLoading }) => {
       )
     }
   </div>
-  );
-};
+  )
+}
 
-export default List;
+export default List

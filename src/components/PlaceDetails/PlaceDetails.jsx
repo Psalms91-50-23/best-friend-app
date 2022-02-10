@@ -8,20 +8,18 @@ const PlaceDetails = ({ place, selected, refProp }) => {
   // console.log("place ", place);
   const { distance, name, distance_string, website, address } = place
   const numberDistance = Number(distance).toFixed(2)
-  console.log({refProp})
+  // console.log({refProp})
   const placeDetailRef = useRef(refProp) //create internal ref state for each 
   var cuisineType = ""
 
   if(selected && placeDetailRef?.current){
-    // console.log({selected})
-    // console.log({refProp});
+    //below code is what it uses to scroll into view
     placeDetailRef?.current?.scrollIntoView({behavior: "smooth", block: "start"})
-    // console.log({placeDetailRef});
   }
-  console.log({placeDetailRef});
+  // console.log({placeDetailRef});
   
   return (
-  <div className="place_container" >
+  <div className="place_container"  ref={placeDetailRef}>
     <div className="place_details">
       {place.photo ?
         <img className="img_size" src={place.photo.images.large.url} alt={place.name} />
@@ -51,8 +49,8 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         :
         <span>Distance not available</span>
       }
-      {/* this span is just a dummy location for referencing */}
-      <p className="dummy" ref={placeDetailRef}></p>
+      {/* this p is just a dummy location for referencing */}
+      {/* <p className="dummy" ref={placeDetailRef}></p> */}
       {place.cuisine? (
         place.cuisine.map((foodType, index) => {
 

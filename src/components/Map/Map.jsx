@@ -8,6 +8,7 @@ import Rating from "@material-ui/lab";
 import mapStyles from './mapStyles';
 import "./Map.css"
 import MapCard from './MapCard/MapCard';
+import UserLocation from './UserLocation/UserLocation';
 
 const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }) => {
   // const matches = useMediaQuery('(min-width: 600px)')
@@ -33,10 +34,9 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
       onChildClick={(child) => setChildClicked(child)}
       // onChildClick={(child) => setChildClicked(child)}
     >
+      {/* <UserLocation /> */}
       { places.length && places.map((place, i) => {
-      // console.log(`lat: ${place.latitude} lng: ${place.longitude}`);
-      // const latitude = Number(place.latitude)
-      // const longitude = Number(place.longitude)
+    
       if(place?.latitude){
         // must be a react component it returns not plain html element, or you will get errors the code below
         return (
@@ -53,7 +53,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places, setChildClicked }
     }
     </GoogleMapReact>
   </div>
-  );
-};
+  )
+}
 
-export default Map;
+export default Map

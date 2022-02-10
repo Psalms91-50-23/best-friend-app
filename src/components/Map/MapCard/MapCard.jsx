@@ -37,6 +37,6 @@ const MapCard = ({ place }) => {
         </div>
     </div>
   )
-};
+}
 
 export default MapCard;

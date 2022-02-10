@@ -1,71 +1,101 @@
 import React, { useEffect, useState } from 'react';
-// import { CssBaseLine, Grid } from "@material-ui/core"
 import { getPlacesData } from './api';
 import Header from './components/Header/Header';
 import List from './components/List/List';
 import Map from './components/Map/Map';
+import { useSelector, useDispatch  } from 'react-redux';
+import { set_Geolocation } from './actions/bestFriendActions';
 // import PlaceDetails from './components/PlaceDetails/PlaceDetails';
 import "./App.css"
 
 const App = () => {
 
+  const dispatch = useDispatch()
+  const { peoplesRating, searchType } = useSelector(state => state.bestFriendApp)
   const [ places, setPlaces ] = useState([])
+  const [ filteredPlaces, setFilteredPlaces ] = useState([])
   const [ bounds, setBounds ] = useState(null)
   const [ coordinates, setCoordinates ] = useState({})
-  const [ childClicked, setChildClicked ] = useState(null);
+  const [ childClicked, setChildClicked ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
     //built in browser geolocation api
-    navigator.geolocation.getCurrentPosition( coordinates => {
-      // console.log("coordinates ", coordinates);
-      // const { coords } = coordinates
-      const { latitude, longitude } = coordinates.coords
-      setCoordinates({ lat: latitude, lng: longitude })
-      //below is wellington
-      // setCoordinates({ lat: -41.276825, lng: 174.777969 })
-      
-    })
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 7000,
+    }
+
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition( successCallBack, errorCallback, options )
+    }else{
+      alert("Geolocation is not supported by this browser. Need geolocation for application purposes")
+    }
   },[])
 
-  
   useEffect(() => {
 
+    const filteredPlaces = places?.filter( place => place.rating > peoplesRating )
+    setFilteredPlaces(filteredPlaces)
+
+  },[peoplesRating])
+
+  useEffect(() => {
     // console.log("bounds ", bounds);
     setIsLoading(true)
+    // console.log("search type ", searchType)
     if(bounds){
       const { ne, sw } = bounds
-      getPlacesData(ne, sw)
+      getPlacesData( searchType, ne, sw)
       .then((data) => {
-        // console.log("data in app.jsx ", data);
+        console.log({data})
         const coordPlaces = data.filter( place => {
           if(place?.latitude){
             return place
           }
         })
-        // console.log("place with images", coordPlaces);
         setPlaces(coordPlaces)
         setIsLoading(false)
       })
     }
+  },[bounds, coordinates, searchType])
 
-  },[bounds, coordinates])
+  const successCallBack = (coordinates) => {
+    // console.log({coordinates})
+    //below code is wellington geoLocation
+    // const geo = { lat: -41.276825, lng : 174.777969}
+    const { latitude, longitude } = coordinates.coords
+    setCoordinates({ lat: latitude, lng: longitude })
+    dispatch(set_Geolocation(coordinates))
+  }
 
-  // useEffect(() => {
+  const errorCallback = (error) => {
 
-  //   setCoordinates(coordinates)
-  //   // console.log("coordinates: ",coordinates);
-  // },[coordinates])
+   switch(error.code) {
+    case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation. You can turn it off with the lock icon/information icon next(left-side) to the URL")
+        break;
+    case error.POSITION_UNAVAILABLE:
+        alert( "Location information is unavailable.")
+        break;
+    case error.TIMEOUT:
+        alert("The request to get user location timed out.")
+        break;
+    case error.UNKNOWN_ERROR:
+        alert("An unknown error occurred.")
+        break;
+    default:
+        alert("error code: ",error.code)
+    }
+  }
 
-  // console.log("useragentdata ",navigator.userAgentData);
-// console.log("places ", places);
   return (
     <div className='App'>
       <Header />
       <div className="home_container">
           <div className="list_container">
             <List 
-              places={places}
+              places={ filteredPlaces.length? filteredPlaces : places }
               childClicked={childClicked}
               isLoading={isLoading}
             />
@@ -76,7 +106,7 @@ const App = () => {
               setBounds={setBounds} 
               coordinates={coordinates}
               setCoordinates={setCoordinates}
-              places={places}
+              places={ filteredPlaces.length? filteredPlaces : places }
             />
           </div>
       </div>
