@@ -66,11 +66,9 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    console.log("coordinates ",coordinates)
     if(bounds?.sw && bounds?.ne) {
       getWeatherData(coordinates.lng, coordinates.lat)
       .then((data) => {
-        console.log("weahter data ",data);
         dispatch(setWeatherData(data))
       })
 

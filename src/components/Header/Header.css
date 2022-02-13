@@ -3,7 +3,6 @@
     flex-direction: row;
     background-color: rgba(21, 0, 251, 0.6);
     height: auto;
-    /* background-color: aqua; */
 }
 
 .header_content {
@@ -36,11 +35,9 @@
 
 
 .explore_title > h5 {
-
     margin: 0;
     padding: 0 10px;
     color: white;
-
 }
 
 .search_content {
@@ -49,7 +46,6 @@
     flex-direction: row;
     background-color: rgba(186, 182, 231, 0.3);
     border-radius: 5px;
-
 }
 
 .searchIcon {
@@ -65,9 +61,8 @@
     background-color: transparent;
     color: white;
     font-size: 0.7rem;
-    
 }
+
 .search_content > input::placeholder { 
-    color: white;
-    
+    color: white; 
 }

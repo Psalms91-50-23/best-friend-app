@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import "./MapCard.css"
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import { useMediaQuery } from '@material-ui/core';
