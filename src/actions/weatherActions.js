@@ -1,8 +1,8 @@
 export const WEATHER = "WEATHER"
 
-export function setWeather(weather){
+export function setWeatherData(weatherData){
     return {
         type: WEATHER,
-        weather
+        weatherData
     }
 }

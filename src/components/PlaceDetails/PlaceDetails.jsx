@@ -1,17 +1,15 @@
 import React, {  useRef } from 'react';
-// import LocationOnIcon  from "@material-ui/icons/LocationOn"
 import PhoneIcon  from "@material-ui/icons/Phone"
 import Rating from "@material-ui/lab/Rating"
 import "./PlaceDetails.css"
 
 const PlaceDetails = ({ place, selected, refProp }) => {
-  // const { distance, address } = place
-  // const numberDistance = Number(distance).toFixed(2)
-  const placeDetailRef = useRef(refProp) //create internal ref state for each 
+  //create internal ref state for each 
+  const placeDetailRef = useRef(refProp) 
   var cuisineType = ""
-
   if(selected && placeDetailRef?.current){
-    //below code is what it uses to scroll into view
+    //below code is what it used to scroll into view the 
+    //placeDetail cards
     placeDetailRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
   
@@ -51,8 +49,6 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         :
         <span>Distance not available</span>
       }
-      {/* this p is just a dummy location for referencing */}
-      {/* <p className="dummy" ref={placeDetailRef}></p> */}
       {place.cuisine? (
         place.cuisine.map((foodType, index) => {
 
@@ -107,7 +103,6 @@ const PlaceDetails = ({ place, selected, refProp }) => {
           <span className="span">{place.ranking}</span>
         </div>
       )
-
       }
        <div className="place_links">
          {/* window.open(place.weburl, "_blank") will open a new tab */}

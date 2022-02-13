@@ -4,10 +4,9 @@ import Header from './components/Header/Header';
 import List from './components/List/List';
 import Map from './components/Map/Map';
 import { useSelector, useDispatch  } from 'react-redux';
-import { setFilteredPlaces, setPlaces, emptyPlaces, emptyAllPlaces } from './actions/placesActions';
+import {  setPlaces } from './actions/placesActions';
 import { setCoordinates } from './actions/geolocationActions';
-import { setWeather } from './actions/weatherActions';
-// import PlaceDetails from './components/PlaceDetails/PlaceDetails';
+import { setWeatherData } from './actions/weatherActions';
 import "./App.css"
 
 const App = () => {
@@ -25,18 +24,15 @@ const App = () => {
   const [ _rating, _setRating ] = useState(rating)
 
   useEffect(() => {
-    //built in browser geolocation api
     const options = {
       enableHighAccuracy: true,
     }
 
     const successCallBack = (coordinates) => {
-      // console.log({coordinates})
       //below code is wellington geoLocation
       // const geo = { lat: -41.276825, lng : 174.777969}
       const { latitude, longitude } = coordinates.coords
       const coords = { lat: latitude, lng: longitude }
-      // _setCoordinates(coords)
       dispatch(setCoordinates(coords))
     }
   
@@ -59,7 +55,7 @@ const App = () => {
           alert("error code: ",error.code)
       }
     }
-
+    //built in browser geolocation api
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition( successCallBack, errorCallback, options )
       }else{
@@ -70,21 +66,18 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    // dispatch(emptyAllPlaces())
+    console.log("coordinates ",coordinates)
     if(bounds?.sw && bounds?.ne) {
-      // _setBounds(bounds)
-      // getWeatherData(coordinates.lng, coordinates.lat)
-      // .then((data) => {
-      //   dispatch(setWeather(data))
-      // })
+      getWeatherData(coordinates.lng, coordinates.lat)
+      .then((data) => {
+        console.log("weahter data ",data);
+        dispatch(setWeatherData(data))
+      })
 
       getPlacesData( searchType, bounds.ne, bounds.sw )
       .then((data) => {
-        // console.log("data in app ", data)
         const coordPlaces = data.filter( place => place.latitude )
-        // console.log("coordPlaces in app ",coordPlaces)
         dispatch(setPlaces(coordPlaces))
-        // _setPlaces(coordPlaces)
         setIsLoading(false)
       })
     }

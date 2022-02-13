@@ -5,27 +5,22 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails';
 import { setType } from '../../actions/inputActions';
 import { setFilteredPlaces, setPlaces } from '../../actions/placesActions';
 import "./List.css"
-//const List = ({ places, childClicked, isLoading }) => {
+
 const List = ({ childClicked, isLoading }) => {
 
   const dispatch = useDispatch()
-  // const listPlaceRefs = useRef(new Array())
   const { places, filteredPlaces } = useSelector(state => state.placesState) 
-  // console.log({filteredPlaces});
   const { searchType, rating } = useSelector(state => state.inputState)
-  // const [ _places, _setPlaces ] = useState([])
-  // const [ _filteredPlaces, _setFilteredPlaces ] = useState([])
   const [ _type, _setType ] = useState(searchType)
   const [ _rating, _setRating ] = useState(rating)
+  //this is useRef is used for creating refs in the map cards
+  // to ref cards in the place cards on left side
   var placeRefs = useRef([])
-  
   useEffect(() => {
-    // console.log("rating in use effect ", _rating);
     if(_rating > 0){
       const filteredPlaces = places.filter(place => Number(place.rating) >= _rating )
-      // console.log("filter places in list if ", filteredPlaces)
-      // dispatch(setPlaces([]))
       dispatch(setFilteredPlaces(filteredPlaces))
+      //creating refs 
       Array(filteredPlaces.length).fill().map((_, i) => {
         //create refs for map cards to scroll to side bar cards
         placeRefs.current.push(i)
@@ -33,11 +28,9 @@ const List = ({ childClicked, isLoading }) => {
       })
     }
     else{
-      // console.log("filter places in list else ", places)
       dispatch(setFilteredPlaces([]))
       dispatch(setPlaces(places))
       Array(places.length).fill().map((_, i) => {
-        //create refs for map cards to scroll to side bar cards
         placeRefs.current.push(i)
         return null
       })
@@ -91,7 +84,6 @@ const List = ({ childClicked, isLoading }) => {
           <div className="list_place_container">
             { filteredPlaces?.length ? 
             filteredPlaces?.map((place,i) => {
-
                  return (
                  <PlaceDetails 
                     key={i} 
@@ -102,7 +94,7 @@ const List = ({ childClicked, isLoading }) => {
                  )
             })
             :
-              places?.map( (place ,i ) => {
+              places?.map((place,i) => {
                 return (
                   <PlaceDetails 
                     key={i} 
