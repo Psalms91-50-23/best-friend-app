@@ -1,27 +1,52 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch  } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 import PlaceDetails from '../PlaceDetails/PlaceDetails';
-import { set_Type, set_Rating } from '../../actions/bestFriendActions';
+import { setType } from '../../actions/inputActions';
+import { setFilteredPlaces, setPlaces } from '../../actions/placesActions';
 import "./List.css"
-
-const List = ({ places, childClicked, isLoading }) => {
+//const List = ({ places, childClicked, isLoading }) => {
+const List = ({ childClicked, isLoading }) => {
 
   const dispatch = useDispatch()
-   
-  const [ type, setType ] = useState("restaurants")
-  const [ rating, setRating ] = useState("")
+  // const listPlaceRefs = useRef(new Array())
+  const { places, filteredPlaces } = useSelector(state => state.placesState) 
+  // console.log({filteredPlaces});
+  const { searchType, rating } = useSelector(state => state.inputState)
+  // const [ _places, _setPlaces ] = useState([])
+  // const [ _filteredPlaces, _setFilteredPlaces ] = useState([])
+  const [ _type, _setType ] = useState(searchType)
+  const [ _rating, _setRating ] = useState(rating)
+  var placeRefs = useRef([])
+  
+  useEffect(() => {
+    // console.log("rating in use effect ", _rating);
+    if(_rating > 0){
+      const filteredPlaces = places.filter(place => Number(place.rating) >= _rating )
+      // console.log("filter places in list if ", filteredPlaces)
+      // dispatch(setPlaces([]))
+      dispatch(setFilteredPlaces(filteredPlaces))
+      Array(filteredPlaces.length).fill().map((_, i) => {
+        //create refs for map cards to scroll to side bar cards
+        placeRefs.current.push(i)
+        return null
+      })
+    }
+    else{
+      // console.log("filter places in list else ", places)
+      dispatch(setFilteredPlaces([]))
+      dispatch(setPlaces(places))
+      Array(places.length).fill().map((_, i) => {
+        //create refs for map cards to scroll to side bar cards
+        placeRefs.current.push(i)
+        return null
+      })
+    }
+  },[_rating, places])
 
   useEffect(() => {
-    console.log({rating})
-    setRating(rating)
-    dispatch(set_Rating(rating))
-  },[rating])
-
-  useEffect(() => {
-    setType(type)
-    dispatch(set_Type(type))
-  },[type])
+    dispatch(setType(_type))
+  },[_type])
 
   return (
   <div className="list">
@@ -40,9 +65,9 @@ const List = ({ places, childClicked, isLoading }) => {
             <form className="list_type">
               <label htmlFor="type">Type</label>
               <select
-                value={type}
+                value={_type}
                 name="type"
-                onChange={ e => setType(e.target.value)}
+                onChange={ e => _setType(e.target.value)}
               >
                 <option value="restaurants">Restaurants</option>
                 <option value="hotels">Hotels</option>
@@ -52,9 +77,9 @@ const List = ({ places, childClicked, isLoading }) => {
             <form className="list_ratings">
               <label htmlFor="rating">Rating</label>
               <select
-                value={rating}
+                value={Number(_rating)}
                 name="rating"
-                onChange={ e => setRating(e.target.value)}
+                onChange={ e => _setRating(Number(e.target.value))}
               >
                 <option value={0}>All</option>
                 <option value={3}>Above 3.0</option>
@@ -64,24 +89,30 @@ const List = ({ places, childClicked, isLoading }) => {
             </form>
           </div>
           <div className="list_place_container">
-            {places?.map((place,i) => {
+            { filteredPlaces?.length ? 
+            filteredPlaces?.map((place,i) => {
 
-              //if latitude exists, so will longitude, just checking for lat, as some do no have lat/lng
-              //i didnt place card on map so the map for businesses
-        
-                // if(i === placeRef.length-1){
-                //   console.log({placeRef});
-                // }
                  return (
                  <PlaceDetails 
                     key={i} 
                     place={place} 
                     selected={Number(childClicked) === i}
-                    refProp={i}
+                    refProp={placeRefs[i]}
                   />
                  )
-
-            })}
+            })
+            :
+              places?.map( (place ,i ) => {
+                return (
+                  <PlaceDetails 
+                    key={i} 
+                    place={place} 
+                    selected={Number(childClicked) === i}
+                    refProp={placeRefs[i]}
+                  />
+                  )
+              })
+            }
           </div>
         </> 
       )

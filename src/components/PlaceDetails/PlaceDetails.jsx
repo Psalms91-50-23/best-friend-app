@@ -1,22 +1,19 @@
-import React, { useState, useRef } from 'react';
-import LocationOnIcon  from "@material-ui/icons/LocationOn"
+import React, {  useRef } from 'react';
+// import LocationOnIcon  from "@material-ui/icons/LocationOn"
 import PhoneIcon  from "@material-ui/icons/Phone"
 import Rating from "@material-ui/lab/Rating"
 import "./PlaceDetails.css"
 
 const PlaceDetails = ({ place, selected, refProp }) => {
-  // console.log("place ", place);
-  const { distance, name, distance_string, website, address } = place
-  const numberDistance = Number(distance).toFixed(2)
-  // console.log({refProp})
+  // const { distance, address } = place
+  // const numberDistance = Number(distance).toFixed(2)
   const placeDetailRef = useRef(refProp) //create internal ref state for each 
   var cuisineType = ""
 
   if(selected && placeDetailRef?.current){
     //below code is what it uses to scroll into view
-    placeDetailRef?.current?.scrollIntoView({behavior: "smooth", block: "start"})
+    placeDetailRef?.current?.scrollIntoView({ behavior: "smooth", block: "start" })
   }
-  // console.log({placeDetailRef});
   
   return (
   <div className="place_container"  ref={placeDetailRef}>
@@ -32,18 +29,23 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         <h6>Place name not registered</h6>
       }
       <div className="general_cardLayout" >
-          <Rating className="rating" size="small" value={Number(place.rating)} readOnly/>
+          <Rating 
+            className="rating" 
+            size="small" 
+            value={Number(place.rating)} 
+            readOnly
+          />
           <p>out of {place.num_reviews} review</p>
         </div>
       {place.address ?
-        <h6>Address: {address}</h6>
+        <h6>Address: {place.address}</h6>
         :
         <span className="span">Address is not available</span>
       }
       {place.distance ? (
         <div className="general_cardLayout">
           <h6>Distance from your location:</h6>
-          <span className="span">{numberDistance} km</span>
+          <span className="span">{Number(place.distance).toFixed(2)} km</span>
         </div>
       )
         :
@@ -116,7 +118,7 @@ const PlaceDetails = ({ place, selected, refProp }) => {
           )
          }
          {place?.website && (
-          <button className="place_buttonLink" onClick={() => window.open(place.website, "_blank")}>
+          <button className="place_buttonLink2" onClick={() => window.open(place.website, "_blank")}>
             <span className="span">{place.name}</span>
           </button>
           )
