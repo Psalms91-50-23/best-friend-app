@@ -12,16 +12,10 @@ import "./App.css"
 const App = () => {
 
   const dispatch = useDispatch()
-  const { rating, searchType } = useSelector(state => state.inputState)
-  const { places, filteredPlaces } = useSelector(state => state.placesState)
+  const {  searchType } = useSelector(state => state.inputState)
   const { bounds, coordinates } = useSelector(state => state.geolocationState)
-  const [ _places, _setPlaces ] = useState(places)
-  const [ _filteredPlaces, _setFilteredPlaces ] = useState(filteredPlaces)
-  const [ _bounds, _setBounds ] = useState(bounds)
-  const [ _coordinates, _setCoordinates ] = useState(coordinates)
   const [ childClicked, setChildClicked ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(false)
-  const [ _rating, _setRating ] = useState(rating)
 
   useEffect(() => {
     const options = {
@@ -80,7 +74,7 @@ const App = () => {
       })
     }
       
-  },[bounds, searchType, dispatch])
+  },[bounds, searchType, dispatch, coordinates])
 
   return (
     <div className='App'>

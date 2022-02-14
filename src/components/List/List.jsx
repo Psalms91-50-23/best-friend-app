@@ -35,11 +35,11 @@ const List = ({ childClicked, isLoading }) => {
         return null
       })
     }
-  },[_rating, places])
+  },[_rating, places, dispatch ])
 
   useEffect(() => {
     dispatch(setType(_type))
-  },[_type])
+  },[_type, dispatch])
 
   return (
   <div className="list">

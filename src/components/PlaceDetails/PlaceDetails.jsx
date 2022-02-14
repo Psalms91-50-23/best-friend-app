@@ -65,7 +65,9 @@ const PlaceDetails = ({ place, selected, refProp }) => {
                   <span className="span">{cuisineType}</span>
                 </div>
               )
-            } 
+            }
+            else return null
+             
           })
         )
         :
