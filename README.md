@@ -1,5 +1,6 @@
 # Best-Friend App, your BFF when it comes to travelling
 
+"npm i" then "npm start" to start your app, assuming you have all the API keys in the .env file.
 Search locations and it will show Restaurants, Attractions and Hotels near you. 
 Make sure you allow Geolocation so that your Friend can be with you wherever you go, 
 you can filter. If you want to click the map cars on Google map,
