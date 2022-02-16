@@ -34,7 +34,7 @@ const App = () => {
   
      switch(error.code) {
       case error.PERMISSION_DENIED:
-          alert("User denied the request for Geolocation. You can turn it off with the lock icon/information icon next(left-side) to the URL")
+          alert("User denied the request for Geolocation. You can turn it on with the lock icon/information icon next(left-side) to the URL, need location for app to work!")
           break;
       case error.POSITION_UNAVAILABLE:
           alert( "Location information is unavailable.")

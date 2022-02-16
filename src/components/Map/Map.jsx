@@ -20,7 +20,7 @@ const Map = ({ setChildClicked }) => {
     <GoogleMapReact 
       bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAP_API_KEY}}
       // defaultCenter={coordinates} 
-      //dont use default as it wards you that you cannot change it
+      //dont use default as it warns you that you cannot change it
       center={{lat: coordinates?.lat, lng: coordinates?.lng}}
       defaultZoom={14}
       margin={[ 50, 50, 50, 50 ]}
@@ -53,7 +53,14 @@ const Map = ({ setChildClicked }) => {
       ))
     }
     {weatherData?.list?.length && weatherData.list.map((data, i) => {
-      return <WeatherCard key={i} data={data} lng={data.coord.lon} lat={data.coord.lat}/>
+      return (
+      <WeatherCard 
+        key={i} 
+        data={data} 
+        lng={data.coord.lon} 
+        lat={data.coord.lat}
+      />
+      )
     })
     }
     </GoogleMapReact>
