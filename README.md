@@ -2,9 +2,8 @@
 
 "npm i" then "npm start" to start your app, assuming you have all the API keys in the .env file.
 Search locations and it will show Restaurants, Attractions and Hotels near you. 
-Make sure you allow Geolocation so that your Friend can be with you wherever you go, 
-you can filter. If you want to click the map cars on Google map,
-clicked around the left-center of the image and it will scroll to the side details of that place with links to trip advisor and their website. By default Geolocation will be your devices location, but you can also search other places.
+Make sure you allow Geolocation so that your Friend can be with you wherever you go and you can also filter.
+If you want to click the map cards on Google map, click it around the left-center of the image and it will scroll to the side details of that place with links to trip advisor and their website.By default Geolocation will be your devices location, but you can also search other places.
 
 ## Sorry to those who do not have the links, as this app has request allowance for external apis, only those who have links will be able to test the app out.
 

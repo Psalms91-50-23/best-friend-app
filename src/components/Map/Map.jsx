@@ -31,25 +31,30 @@ const Map = ({ setChildClicked }) => {
         dispatch(setCoordinates({ lat: e.center.lat, lng: e.center.lng }))
       }
       }
-      onChildClick={(child) => setChildClicked(child)}
+      onChildClick={(child) => {
+        console.log("child ", child);
+        setChildClicked(child)}}
     >
     {filteredPlaces?.length ? 
       (
-        filteredPlaces?.map((place, i) => <MapCard 
-        key={i} 
-        place={place} 
-        lat={Number(place.latitude)} 
-        lng={Number(place.longitude)}
-      />
+        filteredPlaces?.map((place, i) => (
+        <MapCard 
+          key={i} 
+          place={place} 
+          lat={Number(place.latitude)} 
+          lng={Number(place.longitude)}
+        />
+         )
       ))
       :
       (
-        places?.map((place, i) => <MapCard 
-        key={i} 
-        place={place} 
-        lat={Number(place.latitude)} 
-        lng={Number(place.longitude)}
-      />
+        places?.map((place, i) => (
+        <MapCard 
+          key={i} 
+          place={place} 
+          lat={Number(place.latitude)} 
+          lng={Number(place.longitude)}
+        />)
       ))
     }
     {weatherData?.list?.length && weatherData.list.map((data, i) => {

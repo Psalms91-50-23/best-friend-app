@@ -32,7 +32,7 @@ const Header = () => {
             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged} >
               <div className="search_content">
                 <SearchIcon className='searchIcon' fontSize="small"/>
-                <input type="text" placeholder='Search...'/>
+                <input type="text" placeholder='Search by Location...'/>
               </div>
             </Autocomplete>
           </div>
