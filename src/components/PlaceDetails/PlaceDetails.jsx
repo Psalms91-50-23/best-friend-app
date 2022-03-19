@@ -49,8 +49,8 @@ const PlaceDetails = ({ place, selected, refProp }) => {
         :
         <span>Distance not available</span>
       }
-      {place.cuisine? (
-        place.cuisine.map((foodType, index) => {
+      {
+        place?.cuisine?.map((foodType, index) => {
 
             if(index < place.cuisine.length-1){
               cuisineType += foodType.name+", "
@@ -66,12 +66,8 @@ const PlaceDetails = ({ place, selected, refProp }) => {
                 </div>
               )
             }
-            else return null
-             
+            else return null  
           })
-        )
-        :
-        <span>Cuisine type not given</span>
       }
       {place?.awards?.map((award,index) => {
          return (

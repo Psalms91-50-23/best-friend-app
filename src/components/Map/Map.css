@@ -12,3 +12,9 @@
         width: auto;
     }
 }
+@media only screen and (min-width: 601px){
+    .map {
+        height: 87vh;
+        width: auto;
+    }
+}

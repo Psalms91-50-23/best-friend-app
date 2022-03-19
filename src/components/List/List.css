@@ -2,6 +2,7 @@
     max-height: 85vh ;
     height: 100%;
     box-sizing: border-box;
+    position: relative;
 }
 
 .loading{
@@ -11,6 +12,7 @@
 }
 
 .list_title {
+    background-color: white;
     padding-left: 10px;
 }
 
@@ -46,24 +48,24 @@ form > select {
     padding-left: 10px;
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 100%;
 }
 
-@media only screen and (max-width: 600px){
-
+@media only screen and (max-height: 600px){
     .list {
         box-sizing: border-box;
         height: auto;
         overflow-y: scroll;
     }
 
+    .list_place_container {
+        height: 90%;
+        box-sizing: border-box;
+    }
 }
 
-@media only screen and (min-width: 601px){
-
+@media only screen and (min-height: 601px){
     .list_place_container {
-        margin-bottom: 40px;
-        height: 95%;
-
+        height: 96%;
+        box-sizing: border-box;
     }
 }

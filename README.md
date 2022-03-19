@@ -11,6 +11,6 @@ link for Travel Advisor Api and also, Open Weather Api. You have to activate goo
 and activate "Places Api" and "Maps Javascript Api" and also
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=%REACT_APP_GOOGLE_MAP_API_KEY%"></script> in your index.html file, 
 which gives you all the places. Create .env files with REACT_APP_GOOGLE_MAP_API_KEY="your api key here"
-REACT_APP_RAPID_TRAVEL_API_KEY="your api key here"
-REACT_APP_RAPIDAPI_WEATHER_API_KEY="your api key here
+REACT_APP_RAPID_TRAVEL_API_KEY="your api key here",
+REACT_APP_RAPID_WEATHER_API_KEY="your api key here",
 can be in quotes or not, using create-react-app, when creating .env files, you need to start it off with "REACT_APP_" as the start of it so the CRA will pick up the environmental variables

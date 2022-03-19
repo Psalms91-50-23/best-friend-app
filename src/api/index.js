@@ -1,9 +1,4 @@
 import axios from "axios"
-// axios.defaults.withCredentials = true
-
-// Cookies.set('http://localhost:3000', 'true')
-// axios.defaults.withCredentials = true
-// const URL = "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary"
 
 export const getPlacesData = async ( type, ne, sw ) => {
 
@@ -32,7 +27,7 @@ export const getWeatherData = async ( lng, lat ) => {
       params: { lon: lng, lat: lat },
       headers: {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-        'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_WEATHER_API_KEY
+        'x-rapidapi-key': process.env.REACT_APP_RAPID_WEATHER_API_KEY
       }
     })
     return data
