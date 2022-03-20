@@ -50,6 +50,12 @@ form > select {
     overflow-x: hidden;
 }
 
+@media only screen and (max-width: 600px){
+    .list {
+        margin-bottom: 40px;;
+    }
+}
+
 @media only screen and (max-height: 600px){
     .list {
         box-sizing: border-box;
@@ -65,7 +71,7 @@ form > select {
 
 @media only screen and (min-height: 601px){
     .list_place_container {
-        height: 96%;
+        height: 89%;
         box-sizing: border-box;
     }
 }

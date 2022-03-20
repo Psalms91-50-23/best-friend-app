@@ -18,3 +18,10 @@
         width: auto;
     }
 }
+
+@media only screen and (max-height: 1000px){
+    .map {
+        height: 90vh;
+        width: auto;
+    }
+}
