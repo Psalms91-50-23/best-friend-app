@@ -1,16 +1,9 @@
-# Best-Friend App, your BFF when it comes to travelling
+# Purpose of This Website
+This website helps users discover holiday destinations by providing information on restaurants, hotels, and local attractions. Whether you're planning a getaway or just exploring a new area, this platform gives you the information you need to make your trip memorable.
 
-Search locations and it will show Restaurants, Attractions and Hotels near you. 
-Make sure you allow Geolocation so that your Friend can be with you wherever you go and you can also filter.
-If you want to click the map cards on Google map, click it around the left-center of the image and it will scroll to the side details of that place with links to trip advisor and their website.By default Geolocation will be your devices location, but you can also search other places.
-
-## Sorry to those who do not have the links, as this app has request allowance for external apis, only those who have links will be able to test the app out.
-
-You can clone it and put in your own api keys, "npm i" then "npm start" to start your app, assuming you have all the API keys in the .env file https://rapidapi.com/ 
-link for Travel Advisor Api and also, Open Weather Api. You have to activate google apis from https://console.cloud.google.com/
-and activate "Places Api" and "Maps Javascript Api" and also
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=%REACT_APP_GOOGLE_MAP_API_KEY%"></script> in your index.html file, 
-which gives you all the places. Create .env files with REACT_APP_GOOGLE_MAP_API_KEY="your api key here"
-REACT_APP_RAPID_TRAVEL_API_KEY="your api key here",
-REACT_APP_RAPID_WEATHER_API_KEY="your api key here",
-can be in quotes or not, using create-react-app, when creating .env files, you need to start it off with "REACT_APP_" as the start of it so the CRA will pick up the environmental variables
+## Technologies used
+    -   React: For building the user interface and managing components.
+    -   CSS: For styling the website and ensuring a responsive design.
+    -   Redux: For state management, enabling smooth data flow across the app.
+    -   Google API: To fetch location data and provide real-time search results for nearby restaurants, hotels, and attractions.
+    -   GeoLocation: Enables location-based features by detecting the user's current geographic position, enhancing personalized recommendations for nearby restaurants, hotels, and attractions.
