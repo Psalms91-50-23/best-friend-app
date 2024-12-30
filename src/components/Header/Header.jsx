@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Autocomplete } from '@react-google-maps/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCoordinates } from '../../actions/geolocationActions';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import "./Header.css"
 import SearchIcon  from '@material-ui/icons/Search';
 import ResponsiveIcon from '../ResponsiveIcon/ResponsiveIcon';
