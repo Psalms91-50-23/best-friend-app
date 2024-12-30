@@ -1,5 +1,6 @@
 export const BOUNDS = "BOUNDS"
 export const COORDINATES = "COORDS"
+export const USER_COORDINATE = "USER_COORDINATE"
 
 export function setBounds(bounds){
     return {
@@ -12,5 +13,12 @@ export function setCoordinates(coordinates){
     return {
         type: COORDINATES,
         coordinates
+    }
+}
+
+export function setUserCoordinate(user_coordinate){
+    return {
+        type: USER_COORDINATE,
+        user_coordinate
     }
 }

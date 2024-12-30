@@ -32,7 +32,6 @@ const Map = ({ setChildClicked }) => {
       }
       }
       onChildClick={(child) => {
-        // console.log("child ", child);
         setChildClicked(child)}}
     >
     {filteredPlaces?.length ? 

@@ -5,7 +5,7 @@ import List from './components/List/List';
 import Map from './components/Map/Map';
 import { useSelector, useDispatch  } from 'react-redux';
 import {  setPlaces } from './actions/placesActions';
-import { setCoordinates } from './actions/geolocationActions';
+import { setCoordinates, setUserCoordinate } from './actions/geolocationActions';
 import { setWeatherData } from './actions/weatherActions';
 import "./App.css"
 
@@ -28,6 +28,7 @@ const App = () => {
       const { latitude, longitude } = coordinates.coords
       const coords = { lat: latitude, lng: longitude }
       dispatch(setCoordinates(coords))
+      dispatch(setUserCoordinate(coords))
     }
   
     const errorCallback = (error) => {
@@ -40,7 +41,7 @@ const App = () => {
           alert( "Location information is unavailable.")
           break;
       case error.TIMEOUT:
-          alert("The request to get user location timed out.")
+          alert("The request to get user location timed out, please refresh webpage")
           break;
       case error.UNKNOWN_ERROR:
           alert("An unknown error occurred.")

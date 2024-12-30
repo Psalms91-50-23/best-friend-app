@@ -12,6 +12,7 @@
     align-items: center;
     width: 100%;
     margin-right: 5px;
+    margin-top: 10px;
 }
 
 .explore_title {
@@ -41,8 +42,8 @@
 }
 
 .search_content {
-
     display: flex;
+    align-items: center;
     flex-direction: row;
     background-color: rgba(186, 182, 231, 0.3);
     border-radius: 5px;
@@ -61,10 +62,76 @@
     background-color: transparent;
     color: white;
     font-size: 0.7rem;
+    padding: 0.4rem;
 }
 
 .search_content > input::placeholder { 
     color: white; 
+}
+
+.user_location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.user_location:hover {
+    cursor: pointer;
+}
+
+.user_gps {
+    color: white;
+}
+
+@media only screen and (max-width: 499px){ 
+    .header_content > h3 {
+        font-size: 1rem;
+    }
+    .explore_title > h5 {
+        font-size:0.5rem;
+    }
+    .user_location > h5 {
+        font-size: 0.5rem;
+    }
+    .search_content > input {
+        font-size: 0.5rem;
+        font-weight: 600;
+    }
+    
+} 
+
+@media only screen and (min-width: 500px){ 
+    .header_content > h3 {
+        font-size: 1.2rem;
+    }
+    .explore_title > h5 {
+        font-size:0.6rem;
+    }
+    .user_location > h5 {
+        font-size: 0.6rem;
+    }
+    .search_content > input {
+        font-size: 0.6rem;
+        font-weight: 700;
+    }
+    
+}
+
+
+@media only screen and (min-width: 800px){ 
+    .header_content > h3 {
+        font-size: 2rem;
+    }
+    .explore_title > h5 {
+        font-size:1rem;
+    }
+    .user_location > h5 {
+        font-size: 1rem;
+    }
+    .search_content > input {
+        font-size: 1rem;
+        font-weight: 700;
+    } 
 }
 
 @media only screen and (min-width: 1200px){
@@ -73,14 +140,22 @@
         height: 8vh;
     }
     .header_content > h3 {
-        font-size: 5vh;
+        font-size: 3rem;
     }
     .explore_title > h5 {
-        font-size: 3.5vh;
+        font-size:1.5rem;
+    }
+    .user_location > h5 {
+        font-size: 1.5rem;
     }
     .search_content > input {
-        font-size: 2vh;
+        font-size: 1.5rem;
         font-weight: 700;
     }
+    
 }
+
+
+
+
 
