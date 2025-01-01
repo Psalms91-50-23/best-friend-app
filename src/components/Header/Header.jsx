@@ -5,6 +5,7 @@ import { setCoordinates } from '../../actions/geolocationActions';
 import "./Header.css"
 import SearchIcon  from '@material-ui/icons/Search';
 import ResponsiveIcon from '../ResponsiveIcon/ResponsiveIcon';
+import { useMediaQuery } from '@material-ui/core';
 
 const Header = () => {
 
@@ -12,6 +13,7 @@ const Header = () => {
   const [userLocation, setUserLocation] = useState(null)
   const { user_coordinate} = useSelector(state => state.geolocationState)
   const dispatch = useDispatch()
+  const matches = useMediaQuery('(min-width: 1200px)')
   
   useEffect(() => {
     let initially = false;
@@ -46,11 +48,10 @@ const Header = () => {
             <div className="user_location" onClick={() => setUserCoordinate(userLocation)}>
               <h5 className='user_gps'>User GPS</h5>
               <ResponsiveIcon />
-              {/* <LocationOnOutlinedIcon className='icon-color'/> */}
             </div>
             <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged} >
               <div className="search_content">
-                <SearchIcon className='searchIcon' fontSize="medium"/>
+                <SearchIcon className='searchIcon' fontSize={ matches ?"large": "small"}/>
                 <input type="text" placeholder='Search by Location...'/>
               </div>
             </Autocomplete>
