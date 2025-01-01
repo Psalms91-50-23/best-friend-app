@@ -4,7 +4,7 @@ import "./WeatherCard.css"
 const WeatherCard = ({data}) => {
   return (
     <div className="weatherImg">
-        <img  src={`https://openweathermap.org/img/w/${data.weather[0].icon}.png`} alt="" />
+      <img  src={data.weather_icons.length && data.weather_icons[0]} alt="weather image" />
     </div>
   )
 }

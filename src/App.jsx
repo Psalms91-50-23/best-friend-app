@@ -64,6 +64,7 @@ const App = () => {
     if(bounds?.sw && bounds?.ne) {
       getWeatherData(coordinates.lng, coordinates.lat)
       .then((data) => {
+        
         dispatch(setWeatherData(data))
       })
 

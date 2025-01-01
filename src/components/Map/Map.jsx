@@ -56,16 +56,14 @@ const Map = ({ setChildClicked }) => {
         />)
       ))
     }
-    {weatherData?.list?.length && weatherData.list.map((data, i) => {
-      return (
+    {weatherData.location && ( 
       <WeatherCard 
-        key={i} 
-        data={data} 
-        lng={data.coord.lon} 
-        lat={data.coord.lat}
+        key={weatherData.location.lon} 
+        data={weatherData.current} 
+        lng={weatherData.location.lon} 
+        lat={weatherData.location.lat}
       />
       )
-    })
     }
     </GoogleMapReact>
   </div>
