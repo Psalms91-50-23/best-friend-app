@@ -72,4 +72,4 @@ try {
   //   console.error("Error fetching weather data:", error);
   //   throw error;
   // }
-}
+
