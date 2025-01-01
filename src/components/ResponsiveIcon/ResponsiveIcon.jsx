@@ -4,11 +4,8 @@ import "./ResponsiveIcon.css";
 import { useMediaQuery } from '@material-ui/core';
 
 const ResponsiveIcon = () => {
-  // Using useMediaQuery to determine screen size
   const isSmallScreen = useMediaQuery('(max-width: 480px)');
   const isMediumScreen = useMediaQuery('(max-width: 768px)');
-
-  // State to track the icon size
   const [iconSize, setIconSize] = useState('large');
 
   useEffect(() => {
