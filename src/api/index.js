@@ -36,30 +36,31 @@ export const getPlacesData = async ( type, ne, sw ) => {
 //   }
 // }
 
-//from weatherstack.com
-try {
-  const { data } = await axios.get('http://api.weatherstack.com/current', {
-    params: {
-      access_key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
-      query: `${lat},${lng}`,
-    },
-  });
-  if (!data) {
-    throw new Error('No data received from API');
-  }
-  return data;
-} catch (error) {
-  const statusCode = error.response?.status;
-  if (statusCode === 401) {
-    console.error("Unauthorized: Invalid API key");
-  } else if (statusCode === 429) {
-    console.error("Too many requests: Rate limit exceeded");
-  } else {
-    console.error("Error fetching weather data:", error.message);
-  }
-  throw error;
-}
+export const getWeatherData = async ( lng, lat ) => {
 
+  try {
+    const { data } = await axios.get('http://api.weatherstack.com/current', {
+      params: {
+        access_key: process.env.REACT_APP_WEATHERSTACK_API_KEY,
+        query: `${lat},${lng}`,
+      },
+    });
+    if (!data) {
+      throw new Error('No data received from API');
+    }
+    return data;
+  } catch (error) {
+    const statusCode = error.response?.status;
+    if (statusCode === 401) {
+      console.error("Unauthorized: Invalid API key");
+    } else if (statusCode === 429) {
+      console.error("Too many requests: Rate limit exceeded");
+    } else {
+      console.error("Error fetching weather data:", error.message);
+    }
+    throw error;
+  }
+}
   // try {
   //   const { data } = await axios.get('http://api.weatherstack.com/current', {
   //     params: {
