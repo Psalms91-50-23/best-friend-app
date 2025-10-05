@@ -44,7 +44,7 @@ const List = ({ childClicked, isLoading }) => {
   return (
   <div className="list">
     <div className="list_title">
-      <h4>Restaurants, Hotels & Attractions around you</h4>
+      <h4>Restaurants & Attractions around you</h4>
     </div>
     {
       isLoading ? (
