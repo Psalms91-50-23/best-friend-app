@@ -63,7 +63,7 @@ const List = ({ childClicked, isLoading }) => {
                 onChange={ e => _setType(e.target.value)}
               >
                 <option value="restaurants">Restaurants</option>
-                <option value="hotels">Hotels</option>
+                {/* <option value="hotels">Hotels</option> */}
                 <option value="attractions">Attractions</option>
               </select>
             </form>

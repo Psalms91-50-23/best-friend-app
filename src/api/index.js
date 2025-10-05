@@ -3,6 +3,7 @@ import axios from "axios"
 export const getPlacesData = async ( type, ne, sw ) => {
 
     try {
+      
         const { data: { data  }} = await axios.get(`https://travel-advisor.p.rapidapi.com/${type}/list-in-boundary`, {
           params: {
             bl_latitude: sw.lat,
@@ -15,26 +16,13 @@ export const getPlacesData = async ( type, ne, sw ) => {
             'x-rapidapi-key': process.env.REACT_APP_RAPID_TRAVEL_API_KEY
           }
         });  
+
+        console.log("Places Data", data);
         return data;
     }catch(error) {
         console.log(error);
     }
 }
-//previous api key no longer works
-// export const getWeatherData = async ( lng, lat ) => {
-//   try{
-//     const { data } = await axios.get('https://community-open-weather-map.p.rapidapi.com/find', {
-//       params: { lon: lng, lat: lat },
-//       headers: {
-//         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com',
-//         'x-rapidapi-key': process.env.REACT_APP_RAPID_WEATHER_API_KEY
-//       }
-//     })
-//     return data
-//   }catch(error){
-//     console.log(error);
-//   }
-// }
 
 export const getWeatherData = async ( lng, lat ) => {
 
@@ -48,6 +36,8 @@ export const getWeatherData = async ( lng, lat ) => {
     if (!data) {
       throw new Error('No data received from API');
     }
+
+    console.log("Weather Data", data);
     return data;
   } catch (error) {
     const statusCode = error.response?.status;
@@ -61,16 +51,3 @@ export const getWeatherData = async ( lng, lat ) => {
     throw error;
   }
 }
-  // try {
-  //   const { data } = await axios.get('http://api.weatherstack.com/current', {
-  //     params: {
-  //       access_key: process.env.REACT_APP_WEATHERSTACK_API_KEY, 
-  //       query: `${lat},${lng}`, 
-  //     }
-  //   });
-  //   return data;
-  // } catch (error) {
-  //   console.error("Error fetching weather data:", error);
-  //   throw error;
-  // }
-

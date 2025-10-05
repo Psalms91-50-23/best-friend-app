@@ -59,24 +59,36 @@ const App = () => {
     
   },[dispatch])
 
-  useEffect(() => {
-    setIsLoading(true)
-    if(bounds?.sw && bounds?.ne) {
-      getWeatherData(coordinates.lng, coordinates.lat)
-      .then((data) => {
-        
-        dispatch(setWeatherData(data))
-      })
+useEffect(() => {
+  if (!bounds?.sw || !bounds?.ne) return; // guard clause
 
-      getPlacesData( searchType, bounds.ne, bounds.sw )
+  // set loading to true right before triggering the API (not instantly)
+  const delayDebounce = setTimeout(() => {
+    setIsLoading(true);
+
+    const weatherPromise = getWeatherData(coordinates.lng, coordinates.lat)
       .then((data) => {
-        const coordPlaces = data.filter( place => place.latitude )
-        dispatch(setPlaces(coordPlaces))
-        setIsLoading(false)
+        if (!data) return;
+        dispatch(setWeatherData(data));
       })
-    }
-      
-  },[bounds, searchType, dispatch, coordinates])
+      .catch((err) => console.error("Weather API error:", err));
+
+    const placesPromise = getPlacesData(searchType, bounds.ne, bounds.sw)
+      .then((data) => {
+        if (!data) return;
+        const coordPlaces = data.filter((place) => place.latitude);
+        dispatch(setPlaces(coordPlaces));
+      })
+      .catch((err) => console.error("Places API error:", err));
+
+    Promise.allSettled([weatherPromise, placesPromise])
+      .finally(() => setIsLoading(false));
+  }, 1500); // 👈 wait 1.5 seconds after user stops moving the map
+
+  // cleanup function: cancels previous timer if dependencies change quickly
+  return () => clearTimeout(delayDebounce);
+
+}, [bounds, searchType, coordinates, dispatch]);
 
   return (
     <div className='App'>
